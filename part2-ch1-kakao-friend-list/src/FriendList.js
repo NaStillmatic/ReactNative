@@ -8,7 +8,7 @@ const bottomSpace = getBottomSpace(); // not working
 
 export default (props) => {
     const insets = useSafeAreaInsets();
-    return (                
+    return props.isOpened ? (                
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: bottomSpace }}>
             {props.data.map((item, index) => (
                 <View key={index}>                    
@@ -21,5 +21,5 @@ export default (props) => {
                 </View>                
             ))}
         </ScrollView>
-    )
+    ) : null;
 };
