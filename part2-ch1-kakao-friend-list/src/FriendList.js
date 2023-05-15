@@ -1,15 +1,10 @@
 import { ScrollView, View } from "react-native";
 import Profile from "./Profile";
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getBottomSpace } from "react-native-iphone-x-helper";
 import Margin from "./Margin";
 
-const bottomSpace = getBottomSpace(); // not working
-
-export default (props) => {
-    const insets = useSafeAreaInsets();
+export default (props) => {    
     return props.isOpened ? (                
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: bottomSpace }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
             {props.data.map((item, index) => (
                 <View key={index}>                    
                     <Profile                    

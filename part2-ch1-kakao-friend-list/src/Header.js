@@ -1,12 +1,10 @@
 import { View, Text, StyleSheet } from "react-native"
 import { Ionicons } from '@expo/vector-icons'; 
 
-
 const IconButton = (props) => {
     return (
-        <View style={{ paddingHorizontal: 6}}>
+        <View style={{ paddingHorizontal: 6 }}>
             <Ionicons name={props.name} size={24} color="black" />
-
         </View>
     )
 }
@@ -21,8 +19,6 @@ export default () => {
                 <IconButton name="md-musical-notes-outline" />
                 <IconButton name="ios-settings-outline" />
             </View>
-
-
         </View>
     )
 }
