@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { FlatList, Platform, StyleSheet, View } from "react-native";
 
 import { friendProfiles, myProfile } from "./src/data";
 import Header from "./src/Header";
@@ -22,41 +22,61 @@ export default function App() {
     setIsOpened(!isOpened);
   }
 
-  return (      
+  const itemSeparatorComponent = () => <Margin height={13} />
+  const renderItem = ({ item }) => (
+    <View>
+      <Profile
+        uri={item.uri}
+        name={item.name}
+        introduction={item.introduction}
+        isMe={false}
+      />            
+    </View>
+  )
+
+  const listHeaderComponent = () => (
+    <View style={{ backgroundColor:"white" }}>
+      <Header />
+      <Margin height={10} />
+      <Profile
+        uri={myProfile.uri}
+        name={myProfile.name}
+        introduction={myProfile.introduction}
+        isMe={true}
+      />
+
+      <Margin height={15} />
+      <Division /> 
+      <Margin height={12} />
+      <FriendSection 
+        friendProfileLen={friendProfiles.length}
+        onPressArrow={onPressArrow}
+        isOpened={isOpened}
+      />
+      <Margin height={5} />
+    </View>
+  )
+
+  const listFooterComponent = () => <Margin height={10} />
+
+  return (
     <View style={styles.container}>
-      <View style={{ 
-        flex:1,
-        paddingHorizontal: 15        
-      }}>        
-        <Header />
-
-        <Margin height={10} />
-
-        <Profile
-          uri={myProfile.uri}
-          name={myProfile.name}
-          introduction={myProfile.introduction}
-        />
-
-        <Margin height={15} />
-        <Division /> 
-        <Margin height={12} />
-        <FriendSection 
-          friendProfileLen={friendProfiles.length}
-          onPressArrow={onPressArrow}
-          isOpened={isOpened}
-        />
-        <FriendList
-          data={friendProfiles}
-          isOpened={isOpened}
-        />
-      </View>
+      <FlatList
+        data={ isOpened ? friendProfiles : [] }
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        keyExtractor={(item, index) => index}
+        stickyHeaderIndices={[0]}
+        ItemSeparatorComponent={itemSeparatorComponent}
+        renderItem={renderItem}
+        ListHeaderComponent={listHeaderComponent}   
+        ListFooterComponent={listFooterComponent}
+      />
       <TabBar 
         selectedTabIdx={selectedTabIdx} 
-        setSelectedTabIdx={setSelectedTabIdx} 
-      />
-    </View>                        
-  )
+        setSelectedTabIdx={setSelectedTabIdx}        
+      />                   
+    </View>
+  )  
 }
 
 const styles = StyleSheet.create({
