@@ -76,7 +76,19 @@ export default function App() {
         setSelectedTabIdx={setSelectedTabIdx}        
       />                   
     </View>
-  )  
+  )
+
+  return (
+    <View style={styles.container}>
+      <View style={{
+        flex: 1,
+        paddingHorizontal: 15,
+      }}>
+
+        <FriendList data={friendProfiles} isOpened={isOpened} />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
