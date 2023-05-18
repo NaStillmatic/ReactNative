@@ -3,10 +3,18 @@ import { useEffect } from 'react';
 
 import { StyleSheet, Text, View } from 'react-native';
 import { runParacticeDayjs } from './src/practice-dayjs';
+import { getCalendarColumns } from './src/util';
+import dayjs from 'dayjs';
 
 export default function App() {
+
+  const now = dayjs();
+  const columns = getCalendarColumns(now);
+
   useEffect(() => {
     runParacticeDayjs();
+
+    console.log('columns', columns);
   }, []);
   return (
     <View style={styles.container}>
