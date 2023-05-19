@@ -9,6 +9,7 @@ import { FlatList } from 'react-native';
 import Margin from './src/Margin';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useCalendar } from './src/hook/use-calendar';
 
 const columnSize = 35;
 
@@ -48,41 +49,25 @@ const ArrowButton = ({ iconName, onPress }) => {
 
 export default function App() {
 
-  const now = dayjs();  
-  const [selectedDate, setSelectedDate] = useState(now);
+  const now = dayjs();
+
+  const {
+    selectedDate,
+    setSelectedDate,
+    isDatePickerVisible,
+    showDatePicker,
+    hideDatePicker,
+    handleConfirm,
+    subtract1Month,
+    add1Month,
+  } = useCalendar(now);
+
   const columns = getCalendarColumns(selectedDate);
-
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date) => {
-    // console.warn("A date has been picked: ", date);
-    setSelectedDate(dayjs(date));
-    hideDatePicker();
-  };
-
-  const onPressLeftArrow = () => {
-    const newSelectedDate = dayjs(selectedDate).subtract(1, 'month');
-    setSelectedDate(newSelectedDate);
-  }
-
-  const onPressRightArrow = () => {
-    const newSelectedDate = dayjs(selectedDate).add(1, 'month');
-    setSelectedDate(newSelectedDate);
-  }
-
+  const onPressLeftArrow = subtract1Month
+  const onPressRightArrow = add1Month
 
   const listHeaderComponent = () =>  {
-
     const currentDateText = dayjs(selectedDate).format("YYYY.MM.DD.");    
-
     return (
       <View>
         <Margin height={15} />
@@ -139,17 +124,10 @@ export default function App() {
     )
   }
 
-  /** 
-  useEffect(() => {
-    runParacticeDayjs();
-  }, []);
-  */
-
-  useEffect(() => {
-    console.log('changed selectedDate', dayjs(selectedDate).format("YYYY.MM.DD"));
-  }, [selectedDate]);
-
-
+  // useEffect(() => {
+  //   runParacticeDayjs();
+  //   console.log('columns', columns);
+  // }, []);
   
   return (
     <SafeAreaView style={styles.container}>
