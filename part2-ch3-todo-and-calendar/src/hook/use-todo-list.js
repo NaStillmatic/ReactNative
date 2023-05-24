@@ -66,7 +66,8 @@ export const useTodoList = (selectedDate) =>{
     const isSameDate = dayjs(todo.date).isSame(selectedDate, 'date');
     return isSameDate;
   })
-  return {    
+  return {
+    todoList,
     filteredTodoList,
     addTodo,
     removeTodo,
