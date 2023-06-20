@@ -42,6 +42,10 @@ export default function App() {
     closeBigImgModal,
     selectImage,
     selectedImage,
+    moveToPreviousImage,
+    moveToNextImage,
+    showPreviousArrow,
+    showNextArrow,
   } = useGallery();
 
   const onPressOpenGallery = () => {
@@ -81,10 +85,16 @@ export default function App() {
   const onPressImage = (image) => {
     selectImage(image);
     openBigImgModal();
-
   };
   const onPressBigImgModalBackdrop = () => {
     closeBigImgModal();
+  };
+  const onPressLeftArrow = () => {
+    moveToPreviousImage();
+
+  };
+  const onPressRightArrow = () => {
+    moveToNextImage();
   };
 
   const renderItem = ({ item: image, index }) => {
@@ -141,6 +151,10 @@ export default function App() {
         modalVisible={bigImgModalVisible}
         onPressBackdrop={onPressBigImgModalBackdrop}
         selectedImage={selectedImage}
+        onPressLeftArrow={onPressLeftArrow}
+        onPressRightArrow={onPressRightArrow}
+        showPreviousArrow={showPreviousArrow}
+        showNextArrow={showNextArrow}
       />
       {/* 아미지 리스트 */}
       <FlatList

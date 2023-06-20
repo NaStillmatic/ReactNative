@@ -100,11 +100,35 @@ export const useGallery = () => {
   }
   const selectImage = (image) => {
     setSelectedImage(image);
-  }
+  };
+
+  const filteredImages = images.filter((image) => image.albumId === selectedAlbum.id);
+
+  const moveToPreviousImage = () => {
+    const selectedImageIndex = filteredImages.findIndex(image => image.id === selectedImage.id);
+    const previousImageIdx = selectedImageIndex - 1;
+    if (previousImageIdx < 0) return;
+    console.log('selectedImageIndex', selectedImageIndex);
+    console.log('previousImageIdx', previousImageIdx);
+    const previousImage = filteredImages[previousImageIdx];
+    setSelectedImage(previousImage);
+  };
+  const moveToNextImage = () => {
+    const selectedImageIndex = filteredImages.findIndex(image => image.id === selectedImage.id);
+    const nextImageIdx = selectedImageIndex + 1;
+    if ((nextImageIdx > filteredImages.length - 1) || nextImageIdx === -1) return;
+    console.log('selectedImageIndex', selectedImageIndex);        
+    console.log('nextImageIdx', nextImageIdx);
+    const nextImage = filteredImages[nextImageIdx];
+    setSelectedImage(nextImage);
+  };
+
+  const showPreviousArrow = filteredImages.findIndex(image=> image.id === selectedImage?.id) !== 0;
+  const showNextArrow = filteredImages.findIndex(image=> image.id === selectedImage?.id) !== filteredImages.length - 1;
+  
 
   const resetAlbumTitle = () => setAlbumTitle('');
 
-  const filteredImages = images.filter((image) => image.albumId === selectedAlbum.id);
   const imageWithAddButton = [
     ...filteredImages,
     {
@@ -136,5 +160,9 @@ export const useGallery = () => {
     closeBigImgModal,
     selectImage,
     selectedImage,
+    moveToPreviousImage,
+    moveToNextImage,
+    showPreviousArrow,
+    showNextArrow,
   };
 };
