@@ -15,12 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "goobleMobileAdsAppId": "ca-app-pub-9403512725720549~5318621039"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "goobleMobileAdsAppId": "ca-app-pub-9403512725720549~4005539366"
       }
     },
     "web": {
