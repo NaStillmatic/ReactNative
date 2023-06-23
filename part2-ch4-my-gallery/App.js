@@ -1,30 +1,27 @@
+import { useEffect } from 'react';
 import {
-  Alert, 
-  Dimensions, 
-  FlatList, 
-  Image, 
-  Platform, 
-  SafeAreaView, 
+  Alert,
+  Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
-  TouchableOpacity 
+  TouchableOpacity,
 } from 'react-native';
+
+import BigImgModal from './src/BigImgModal';
+import ImageList from './src/ImageList';
+
 
 import MyDropDownPicker from './src/MyDropDownPicker';
 import TextInputModal from './src/TextInputModal';
 import { useGallery } from './src/use-gallery';
-import BigImgModal from './src/BigImgModal';
 import { useRewardAd } from './src/use-reward-ad';
-import { useEffect } from 'react';
-
-const width = Dimensions.get('screen').width;
-const columnSize = width / 3;
 
 export default function App() {
 
-  const { 
-    imageWithAddButton, 
-    pickImage, 
+  const {
+    imageWithAddButton,
+    pickImage,
     deleteImage,
     selectedAlbum,
     textInputModalVisible,
@@ -36,7 +33,7 @@ export default function App() {
     resetAlbumTitle,
     isDropdownOpen,
     openDropDown,
-    closeDropDown, 
+    closeDropDown,
     albums,
     selectAlbum,
     deleteAlbum,
@@ -51,7 +48,7 @@ export default function App() {
     showNextArrow,
   } = useGallery();
 
-  const { 
+  const {
     loadRewardAd,
     isRewarded,
     isClosed,
@@ -99,7 +96,7 @@ export default function App() {
       closeDropDown();
     } else {
       openDropDown();
-    }    
+    }
   };
   const onPressAlbum = (album) => {
     selectAlbum(album);
@@ -130,40 +127,13 @@ export default function App() {
     }
   }, [isRewarded, isClosed]);
 
-  const renderItem = ({ item: image, index }) => {
-    const { id, uri } = image;
-    if (id === -1) {
-      return (      
-        <TouchableOpacity
-          onPress={onPressOpenGallery}
-          style={{ 
-            width: columnSize, 
-            height: columnSize,             
-            backgroundColor: "lightgrey",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <Text style={{ fontWeight: "100", fontSize: 45 }}>+</Text>
-        </TouchableOpacity>
-      );  
-    }
-    return (      
-      <TouchableOpacity onPress={() => onPressImage(image)} onLongPress={() => onLongPressImage(id)}>
-        <Image 
-          source={{ uri }} 
-          style={{ width: columnSize, height: columnSize }} 
-        />
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       {/* 앨범 DropDown, 앨범 추가 버튼 */}
       <MyDropDownPicker
         isDropdownOpen={isDropdownOpen}
-        onPressHeader={onPressHeader}        
-        selectedAlbum={selectedAlbum} 
+        onPressHeader={onPressHeader}
+        selectedAlbum={selectedAlbum}
         onPressAddAlbum={onPressAddAlbum}
         albums={albums}
         onPressAlbum={onPressAlbum}
@@ -171,7 +141,7 @@ export default function App() {
       />
 
       {/* 앨범을 추가하는 TextInputModal */}
-      <TextInputModal 
+      <TextInputModal
         modalVisible={textInputModalVisible}
         albumTitle={albumTitle}
         setAlbumTitle={setAlbumTitle}
@@ -190,11 +160,11 @@ export default function App() {
         showNextArrow={showNextArrow}
       />
       {/* 아미지 리스트 */}
-      <FlatList
-        data={ imageWithAddButton }
-        renderItem={ renderItem }
-        numColumns={3}
-        style={{ zIndex: -1 }}
+      <ImageList
+        imageWithAddButton={imageWithAddButton}
+        onPressOpenGallery={onPressOpenGallery}
+        onPressImage={onPressImage}
+        onLongPressImage={onLongPressImage}
       />
     </SafeAreaView>
   );
@@ -204,6 +174,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: Platform.OS === "android" ? 30: 0,
+    marginTop: Platform.OS === "android" ? 30 : 0,
   },
 });
