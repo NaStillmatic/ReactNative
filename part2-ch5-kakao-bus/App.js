@@ -1,8 +1,11 @@
 import { FlatList, SafeAreaView, SectionList, StyleSheet, Text, View } from 'react-native';
 import BusInfo from './src/BusInfo';
 import { COLOR } from './src/color';
+import { busStop, getSections } from './src/data';
 
 export default function App() {
+  const sections = getSections(busStop.buses);
+
   return (
     <SafeAreaView style={styles.container}>      
       <BusInfo
@@ -12,6 +15,7 @@ export default function App() {
         directionDescription="강남역.강남역사거리"
         numColor={COLOR.BUS_B}
       />
+
       {/* <SectionList
         sections={[
           {
