@@ -10,6 +10,7 @@ export default ({
     num,
     numColor,
     directionDescription,
+    processedNextBusInfos,
 }) => {
     return (
         <View style={{ flexDirection: "row"  }}>
@@ -26,25 +27,26 @@ export default ({
                 />
                 
                 {/* 버스번호, 방향 */}
-                <View style={{ flex: 1}}>
+                <View style={{ flex: 1 }}>
                     <Text style={{ color: numColor, fontSize: 20}}>{num}</Text>
-                    <Text style={{ color: COLOR.GRAY_3, fontSize: 13}}>{directionDescription}</Text>
+                    <Text style={{ color: COLOR.GRAY_3, fontSize: 13}}>{directionDescription} 방향</Text>
                 </View>
             </View>
 
-            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+            <View style={{ 
+                flex: 1, 
+                flexDirection: "row", alignItems: "center" }}>
                 {/* M분 S초 / N번째 전 / 여유 */}
                 <View style={{ flex: 1 }}>
-                    <NextBusInfo
-                        hashInfo={true}
-                        remainedTimeText={"8분 0초"}
-                        numOfRemainedStops={5}
-                        seatStatusText={"여유"}
-                    />
-                    <NextBusInfo
-                        hashInfo={false}
-                        remainedTimeText="도착 정보 없음"
-                    />
+                    {processedNextBusInfos.map((info, index) => (
+                        <NextBusInfo
+                            key={`nBus-${index}`} 
+                            hasInfo={info.hasInfo}
+                            remainedTimeText={info.remainedTimeText}
+                            numOfRemainedStops={info.numOfRemainedStops}
+                            seatStatusText={info.seatStatusText}
+                        />
+                    ))}
                 </View>
 
                 {/* 알람아이콘 */}

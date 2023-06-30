@@ -2,12 +2,12 @@ import { Text, View } from "react-native";
 import { COLOR } from "./color"
 
 export default ({
-    hashInfo,           // remainedTimeText="도착 정보 없음" -> 일 때 true
+    hasInfo,           // remainedTimeText="도착 정보 없음" -> 일 때 true
     remainedTimeText,   // 8분 0초, 곧 도착, 도착 정보 없음
     numOfRemainedStops, // 1, 2, 15
     seatStatusText,     // 1석, 여유, 보통
 }) => {
-    if (!hashInfo) return <Text style={{ color: COLOR.GRAY_2 }}>도착 정보 없음</Text>;
+    if (!hasInfo) return <Text style={{ color: COLOR.GRAY_2 }}>도착 정보 없음</Text>;
 
     return (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
