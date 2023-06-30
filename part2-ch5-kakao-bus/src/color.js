@@ -7,7 +7,7 @@
  * @property WHITE: 정류소 이름
  * @property BLACK: 'M분 S초' 텍스트
  * @property GRAY_1: 북마크 off, 섹션 백그라운드, 'N번째전' 박스 구분선
- * @property GRAY_2: 정류소 방면 설명, 섹션구분선
+ * @property GRAY_2: 정류소 방면 설명, 섹션구분선, 도착정보 없음
  * @property GRAY_3: 헤더 백그라운드, 버스 방면 설명, 'N번째전' 텍스트, 헤더 북마크 동그라미 버튼의 border, 알람아이콘
  * @property GRAY_4: 섹션타이틀
  */
@@ -20,7 +20,7 @@ export const COLOR = {
     WHITE: "#fefeff", // 정류소 이름
     BLACK: "#333333", // 'M분 S초' 텍스트
     GRAY_1: "#eeeeee", // 북마크 off, 섹션 백그라운드, 'N번째전' 박스 구분선
-    GRAY_2: "#c3c4c6", // 정류소 방면 설명, 섹션구분선
+    GRAY_2: "#c3c4c6", // 정류소 방면 설명, 섹션구분선, 도착정보 없음
     GRAY_3: "#979b9e", // 헤더 백그라운드, 버스 방면 설명, 'N번째전' 텍스트, 헤더 북마크 동그라미 버튼의 borderColor, 알람아이콘
     GRAY_4: "#888789", // 섹션타이틀
   };
