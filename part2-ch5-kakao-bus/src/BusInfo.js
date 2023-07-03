@@ -40,7 +40,7 @@ export default ({
                 <View style={{ flex: 1 }}>
                     {processedNextBusInfos.map((info, index) => (
                         <NextBusInfo
-                            key={`nBus-${index}`} 
+                            key={`next-bus-info-${index}`} 
                             hasInfo={info.hasInfo}
                             remainedTimeText={info.remainedTimeText}
                             numOfRemainedStops={info.numOfRemainedStops}
