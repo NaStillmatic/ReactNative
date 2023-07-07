@@ -147,7 +147,7 @@ export default function App() {
     const interval = setInterval(() => {
       const newNow = dayjs();
       setNow(newNow);
-    }, 1000);  
+    }, 5000);  
 
     return () => {
       clearInterval(interval);
