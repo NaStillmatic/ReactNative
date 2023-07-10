@@ -10,7 +10,7 @@ import BookmarkButton from './src/BookmarkButton';
 import { useTheme } from './src/use-theme';
 
 const busStopBookmarkSize = 20;
-const busStopBookmarkPadding= 6;
+const busStopBookmarkPadding = 6;
 
 export default function App() {
   const sections = getSections(busStop.buses);
@@ -23,21 +23,21 @@ export default function App() {
     // TODO
   };
 
-  const ListHeaderComponent = () =>(
-    <View style={{ 
+  const ListHeaderComponent = () => (
+    <View style={{
       backgroundColor: COLOR.GRAY_3,
       height: 170,
-      justifyContent:"center",
+      justifyContent: "center",
       alignItems: "center",
-    }}>      
-      {/* 정류소 번호, 이름, 방향 */}            
-      <Margin height={10}/>
+    }}>
+      {/* 정류소 번호, 이름, 방향 */}
+      <Margin height={10} />
       <Text style={{ color: NEWCOLOR.WHITE_BLACK, fontSize: 13 }}>{busStop.id}</Text>
-      <Margin height={4}/>
+      <Margin height={4} />
       <Text style={{ color: NEWCOLOR.WHITE_BLACK, fontSize: 20 }}>{busStop.name}</Text>
-      <Margin height={4}/>
+      <Margin height={4} />
       <Text style={{ color: NEWCOLOR.GRAY_1_GRAY_2, fontSize: 14 }}>{busStop.directionDescription}</Text>
-      <Margin height={20}/>
+      <Margin height={20} />
 
       {/* 북마크 */}
       <BookmarkButton
@@ -45,9 +45,9 @@ export default function App() {
         size={busStopBookmarkSize}
         isBookmarked={busStop.isBookmarked}
         onPress={onPressBusStopBookmark}
-        style={{ 
-          borderWidth: 0.3, 
-          borderColor: NEWCOLOR.GRAY_1_GRAY_4, 
+        style={{
+          borderWidth: 0.3,
+          borderColor: NEWCOLOR.GRAY_1_GRAY_4,
           borderRadius: (busStopBookmarkSize + busStopBookmarkPadding * 2) / 2,
           padding: busStopBookmarkPadding,
         }}
@@ -65,9 +65,9 @@ export default function App() {
   )
 
   const renderSectionHeader = ({ section: { title } }) => (
-    <View style={{ 
-      padding: 13, 
-      paddingVertical: 3, 
+    <View style={{
+      padding: 13,
+      paddingVertical: 3,
       backgroundColor: NEWCOLOR.GRAY_1_GRAY_4,
       borderTopWidth: 0.5,
       borderBottomWidth: 0.5,
@@ -86,7 +86,7 @@ export default function App() {
      */
     // undefined ?? null -> null 
     // { ... } ?? null -> { ... }
-    const firstNextBusInfo = bus.nextBusInfos?.[0] ?? null; 
+    const firstNextBusInfo = bus.nextBusInfos?.[0] ?? null;
     const secondNextBusInfo = bus.nextBusInfos?.[1] ?? null;
     const newNextBusInfos =
       !firstNextBusInfo && !secondNextBusInfo
@@ -117,12 +117,12 @@ export default function App() {
     /**
      * End
      */
-    
-    return (    
+
+    return (
       <BusInfo
         NEWCOLOR={NEWCOLOR}
         isBookmarked={bus.isBookmarked}
-        onPressBookmark={() => {}}
+        onPressBookmark={() => { }}
         num={bus.num}
         directionDescription={bus.directionDescription}
         numColor={numColor}
@@ -144,7 +144,7 @@ export default function App() {
     setRefreshing(true);
   }
 
-  useEffect(() => {  
+  useEffect(() => {
     if (refreshing) {
       setNow(dayjs());
       setRefreshing(false);
@@ -160,41 +160,42 @@ export default function App() {
     const interval = setInterval(() => {
       const newNow = dayjs();
       setNow(newNow);
-    }, 5000);  
+    }, 5000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  return (    
+  return (
     <View style={{
       ...styles.container,
       backgroundColor: NEWCOLOR.WHITE_BLACK
-    }}>      
+    }}>
       {/* 뒤로가기, 홈 아이콘 */}
       <View style={{
         backgroundColor: COLOR.GRAY_3,
-        width: "100%" }}>
+        width: "100%"
+      }}>
         <SafeAreaView style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <TouchableOpacity style={{ padding: 10}}>
+          <TouchableOpacity style={{ padding: 10 }}>
             <SimpleLineIcons name='arrow-left' size={20} color={NEWCOLOR.WHITE_BLACK} />
           </TouchableOpacity>
           <TouchableOpacity style={{ padding: 10 }}>
             <SimpleLineIcons name='home' size={20} color={NEWCOLOR.WHITE_BLACK} />
           </TouchableOpacity>
         </SafeAreaView>
-        <View style={{ 
-          position: 'absolute', 
-          width: "100%", 
-          height: 500, 
+        <View style={{
+          position: 'absolute',
+          width: "100%",
+          height: 500,
           // backgroundColor: NEWCOLOR.GRAY_3_GRAY_2,
           backgroundColor: COLOR.GRAY_3,
           zIndex: -1,
         }} />
       </View>
-      <SectionList        
-        style={{ flex:1, width: "100%"}}
+      <SectionList
+        style={{ flex: 1, width: "100%" }}
         sections={sections}
         ListHeaderComponent={ListHeaderComponent}
         renderSectionHeader={renderSectionHeader}
@@ -202,11 +203,11 @@ export default function App() {
         ItemSeparatorComponent={ItemSeparatorComponent}
         ListFooterComponent={ListFooterComponent}
         refreshControl={
-          <RefreshControl 
-            refreshing={refreshing} 
-            onRefresh={onRefresh} 
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
           />
-        }        
+        }
       />
     </View>
   );
