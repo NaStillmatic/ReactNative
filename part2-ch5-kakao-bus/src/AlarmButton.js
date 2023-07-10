@@ -4,6 +4,7 @@ import { COLOR } from "./color";
 
 
 export default ({
+    NEWCOLOR,
     onPress,
     style,    
 }) => {
@@ -12,7 +13,7 @@ export default ({
             <Ionicons
                 name="alarm-outline"
                 size={24}
-                color={COLOR.GRAY_3}
+                color={NEWCOLOR.GRAY_3_GRAY_2}
             />
        </TouchableOpacity>
     );

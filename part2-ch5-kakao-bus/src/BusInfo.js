@@ -5,6 +5,7 @@ import { COLOR } from "./color";
 import NextBusInfo from "./NextBusInfo";
 
 export default ({
+    NEWCOLOR,
     isBookmarked,
     onPressBookmark,
     num,
@@ -13,7 +14,7 @@ export default ({
     processedNextBusInfos,
 }) => {
     return (
-        <View style={{ flexDirection: "row", height: 75, backgroundColor: COLOR.WHITE }}>
+        <View style={{ flexDirection: "row", height: 75, backgroundColor: NEWCOLOR.WHITE_BLACK }}>
             <View style={{
                 flex: 0.85,
                 flexDirection: "row",
@@ -21,6 +22,7 @@ export default ({
             }}>
                 {/* 북마크 */}
                 <BookmarkButton
+                    NEWCOLOR={NEWCOLOR}
                     size={20}
                     isBookmarked={isBookmarked}
                     onPress={onPressBookmark}
@@ -41,6 +43,7 @@ export default ({
                 <View style={{ flex: 1 }}>
                     {processedNextBusInfos.map((info, index) => (
                         <NextBusInfo
+                            NEWCOLOR={NEWCOLOR}
                             key={`next-bus-info-${index}`} 
                             hasInfo={info.hasInfo}
                             remainedTimeText={info.remainedTimeText}
@@ -51,7 +54,7 @@ export default ({
                 </View>
 
                 {/* 알람아이콘 */}
-                <AlarmButton onPress={() =>{}} style={{ paddingHorizontal: 15}} />
+                <AlarmButton NEWCOLOR={NEWCOLOR} onPress={() =>{}} style={{ paddingHorizontal: 15}} />
             </View>
         </View>
     );
