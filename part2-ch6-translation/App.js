@@ -5,8 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Button from './src/Button';
 import { useCookie } from './src/use-cookie';
 import { useTranslation } from './src/use-translation';
-
-
+import LoadingView from './src/LoadingView';
 
 /**
  * 스플래시 스크린의 아이콘 출처: https://kor.pngtree.com/freepng/fresh-made-crispy-fortune-cookie_6323404.html
@@ -23,17 +22,17 @@ export default function App() {
   const [isLoaded, setIsLoded] = useState(false);
 
   useEffect(() => {
-    if (locale !== null && cookieKey !== "") {
+    if (cookieKey !== "") {
       setIsLoded(true);
     }
-  }, [locale, cookieKey]);
+  }, [cookieKey]);
   useEffect(() => {
-    if (isLoaded) {
+    if (locale !== null) {
       SplashScreen.hideAsync();
     }    
   }, [isLoaded]);
 
-  // if (locale === null || cookieKey === "") return null;
+  if (!isLoaded) return <LoadingView />;
 
   return (
     <View style={styles.container}>      
