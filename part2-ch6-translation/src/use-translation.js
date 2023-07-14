@@ -14,6 +14,8 @@ const i18n = new I18n({
   ja,
   zh,
 });
+i18n.enableFallback = true;
+i18n.defaultLocale = "ko";
 
 const deviceLanguage = getLocales()[0].languageCode;
 
@@ -38,7 +40,9 @@ export const useTranslation = () => {
   };
 
   useEffect(() => {
-    init();    
+    setTimeout(() => {
+      init();
+    }, 3000);    
   }, []);
 
   return {
