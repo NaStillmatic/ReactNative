@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import LottieView from 'lottie-react-native';
+import { useFonts } from 'expo-font';
 
 import Button from './src/Button';
 import { useCookie } from './src/use-cookie';
@@ -19,6 +20,9 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const { t, locale, setLocale, format } = useTranslation();
   const { cookieKey } = useCookie();
+  const [fontsLoaded] = useFonts({
+    'RIDIBatang': require('./assets/fonts/RIDIBatang.otf'),
+  });
 
   const [isLoaded, setIsLoded] = useState(false);
 
@@ -42,10 +46,10 @@ export default function App() {
     }
   }, [cookieKey]);
   useEffect(() => {
-    if (locale !== null) {
+    if (locale !== null && fontsLoaded) {
       SplashScreen.hideAsync();
     }    
-  }, [isLoaded]);
+  }, [locale, fontsLoaded]);
 
   if (!isLoaded) return <LoadingView />;
 
@@ -93,12 +97,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   todayText: {
+    fontFamily: "RIDIBatang",
     position: 'absolute',
     top: 70,
     fontSize: 13,
     color: "#8b658f",
   },  
   cookieText: {
+    fontFamily: "RIDIBatang",
     fontSize: 22,
     color: "#372538",
     textAlign: "center",
