@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, useWindowDimensions } from 'react-native';
+import { View, useWindowDimensions, ActivityIndicator } from 'react-native';
 import { Header } from '../components/Header/Header';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RemoteImage } from '../components/RemoteImage';
@@ -12,11 +12,14 @@ import * as MediaLibray from 'expo-media-library';
 export const ImageDetailScreen = (props) => {
     const navigation = useNavigation();
     const route = useRoute();
+    const [downloading, setDownloading] = React.useState(false);
+
     const onPressBack = useCallback(() => {        
         navigation.goBack();
     }, [])
 
     const onPressDownload = useCallback(async()=> {
+        setDownloading(true);
         const downloadResumable = FileSystem.createDownloadResumable(
             route.params.url,
             `${FileSystem.documentDirectory}${new Date().getMilliseconds()}.jpg`
@@ -31,6 +34,7 @@ export const ImageDetailScreen = (props) => {
 
             if (permissionResult.status === 'denied') {
                 // 아예 못쓰는 상태.
+                setDownloading(false);
                 return;
             }
             if (permissionResult.status === 'undetermined') {
@@ -38,6 +42,7 @@ export const ImageDetailScreen = (props) => {
                 const requestResult = await MediaLibray.requestPermissionsAsync();
                 console.log(requestResult);
                 if (requestResult.status === 'denied') {
+                    setDownloading(false);
                     return;
                 }
             }
@@ -46,9 +51,12 @@ export const ImageDetailScreen = (props) => {
             const album = await MediaLibray.createAlbumAsync('MyFirstAlbum', asset, false);
             console.log(album);
 
-        } catch(ex) {
-            
+        } catch(ex) {            
+
         }
+
+        setDownloading(false);
+
     }, [])
 
     const {width} = useWindowDimensions();
@@ -67,10 +75,16 @@ export const ImageDetailScreen = (props) => {
 
             <Button onPress={onPressDownload} >
                 <View style={{paddingBottom: 24, backgroundColor: 'black'}}>
-                    <View style={{height: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                        <Typography color={'white'}>DOWNLOAD</Typography>
-                        <Icon name='download' size={24} color='white' />
-                    </View>
+                    {downloading ?  (
+                        <View style={{ height: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
+                            <ActivityIndicator />
+                        </View>
+                    ) : (                    
+                        <View style={{height: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                            <Typography color={'white'}>DOWNLOAD</Typography>
+                            <Icon name='download' size={24} color='white' />
+                        </View>
+                    )}
                 </View>
             </Button>
         </View>        
