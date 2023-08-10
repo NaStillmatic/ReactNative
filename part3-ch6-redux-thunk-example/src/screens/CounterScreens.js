@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { View } from 'react-native';
 import { Header } from '../components/Header/Header';
 import { Button } from '../components/Button';
@@ -7,20 +7,31 @@ import { Spacer } from '../components/Spacer';
 import { Typography } from '../components/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCount, deleteCount } from '../actions/counter';
+import { CounterContext } from '../../App';
+
+const CountetTitle = () => {
+    const [count] = useContext(CounterContext); 
+    return (
+        <Typography>
+            {`${count}개`}
+        </Typography>
+    )
+}
 
 export const CounterScreen = (props) => {
+    const [_, setCount] = useContext(CounterContext);
     // const [value, setValue] = useState(0);
-    const dispatch = useDispatch();
-    const value = useSelector((state) => state.count.count)
+    // const dispatch = useDispatch();
+    // const value = useSelector((state) => state.count.count)
 
     const onPressMinus = useCallback(() => {
-        // setValue((value) => value-1)
-        dispatch(deleteCount());
+        setCount((value) => value-1)
+        // dispatch(deleteCount());
     }, [])
 
     const onPressPlus = useCallback(() => {
-        // setValue((value) => value+1)
-        dispatch(addCount());
+        setCount((value) => value+1)
+        // dispatch(addCount());
     }, [])
 
     return (
@@ -35,11 +46,7 @@ export const CounterScreen = (props) => {
                     </Button>
 
                     <Spacer horizontal space={20} />
-
-                    <Typography>
-                        {`${value}개`}
-                    </Typography>
-
+                    <CountetTitle />
                     <Spacer horizontal space={20} />
 
                     <Button paddingHorizontal={4} pddingVertical={4} onPress={onPressPlus}>
