@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { Header } from '../components/Header/Header';
 import { Button } from '../components/Button';
@@ -8,9 +8,14 @@ import { Typography } from '../components/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCount, deleteCount } from '../actions/counter';
 import { CounterContext } from '../../App';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { counterState } from '../states/counter';
+import { counterMultiplier } from '../selectors/counterMultiplier';
 
 const CountetTitle = () => {
-    const [count] = useContext(CounterContext); 
+    // const [count] = useContext(CounterContext); 
+    const count = useRecoilValue(counterState);    
+
     return (
         <Typography>
             {`${count}개`}
@@ -18,11 +23,21 @@ const CountetTitle = () => {
     )
 }
 
+const CounterMultiplier = () => {
+    const result = useRecoilValue(counterMultiplier);
+    return (
+        <Typography fontSize={20}>
+            {`*5 = ${result}`}
+        </Typography>
+    )
+}
+
 export const CounterScreen = (props) => {
-    const [_, setCount] = useContext(CounterContext);
+    // const [_, setCount] = useContext(CounterContext);
     // const [value, setValue] = useState(0);
     // const dispatch = useDispatch();
     // const value = useSelector((state) => state.count.count)
+    const [count, setCount] = useRecoilState(counterState);
 
     const onPressMinus = useCallback(() => {
         setCount((value) => value-1)
@@ -53,6 +68,7 @@ export const CounterScreen = (props) => {
                         <Icon name='add' size={20} color='black' />
                     </Button>
                 </View>
+                <CounterMultiplier />
             </View>            
         </View>
     )

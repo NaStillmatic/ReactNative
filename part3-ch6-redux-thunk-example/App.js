@@ -1,18 +1,16 @@
 import { createContext, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Provider } from 'react-redux';
 import { CounterScreen } from './src/screens/CounterScreens';
+import { RecoilRoot } from 'recoil';
 
 export const CounterContext = createContext();
 
 export default function App() {
-  const counterState = useState(0);
-
   return (
     <SafeAreaProvider>
-      <CounterContext.Provider value={counterState}>
+      <RecoilRoot>
         <CounterScreen />
-      </CounterContext.Provider>        
+      </RecoilRoot>
     </SafeAreaProvider>    
   );
 }
