@@ -54,7 +54,7 @@ export const CounterScreen = (props) => {
             <Header>
                 <Header.Title title='COUNTER' />
             </Header>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>cd
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     <Button paddingHorizontal={4} pddingVertical={4} onPress={onPressMinus}>
                         <Icon name='remove' size={20} color='black' />

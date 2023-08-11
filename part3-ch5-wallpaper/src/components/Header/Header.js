@@ -28,6 +28,7 @@ export const Header = (props) => {
                 }}>
                     {props.children}
                 </View>
+                <Spacer horizontal={true} space={12} />
             </View>
         </View>
     )
