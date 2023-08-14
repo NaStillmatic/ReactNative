@@ -4,17 +4,19 @@ import { Typography } from './Typography';
 
 export const LottoNumberView = (props) => {
 
-    const getNumberBackgroundColor = useCallback(() => {
-        const randomNumber = Math.floor((Math.random() * 10)) % 6
-        switch (randomNumber) {
-            case 0: return 'red';
-            case 1: return 'blue';
-            case 2: return 'gray';
-            case 3: return 'green';
-            case 4: return 'purple';
-            default: return 'black';
-        }        
-    }, [])
+    const getNumberBackgroundColor = (props) => {
+        if (props < 11) {
+            return 'yellow';
+        } else if (props > 10 && props < 21) {
+            return 'blue';
+        } else if (props > 20 && props < 31) {
+            return 'red';
+        } else if (props > 30 && props < 41) {
+            return 'gray';
+        } else {
+            return 'green';
+        }
+    }
 
     return (
         <View style={{
@@ -26,7 +28,7 @@ export const LottoNumberView = (props) => {
             {props.numbers.map((item) =>{
                 return (
                     <View style={{ 
-                        backgroundColor: getNumberBackgroundColor(), 
+                        backgroundColor: getNumberBackgroundColor(item), 
                         width:40, 
                         height: 40, 
                         borderRadius:20, 
