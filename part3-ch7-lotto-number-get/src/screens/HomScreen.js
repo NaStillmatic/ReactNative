@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import { Header } from '../components/Header/Header';
 import { Spacer } from '../components/Spacer';
 import { Typography } from '../components/Typography';
+import { LottoNumberView } from '../components/LottoNumberView';
 
 export const HomeScreen = (props) => {
     const onPressGetNumber = useCallback(() => {
@@ -28,29 +29,7 @@ export const HomeScreen = (props) => {
                     backgroundColor: 'white',
                     borderColor: 'gray' 
                 }}>
-                    <View style={{
-                        flex: 1, 
-                        flexDirection: 'row', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between'
-                    }}>
-                        {[1, 2, 3, 4, 5, 6].map((item) =>{
-                            return (
-                                <View style={{ 
-                                    backgroundColor: 'black', 
-                                    width:40, 
-                                    height: 40, 
-                                    borderRadius:20, 
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    <Typography fontSize={20} color='white'>
-                                        {item}
-                                    </Typography>                                    
-                                </View>
-                            )
-                        })}                        
-                    </View>                                                    
+                    <LottoNumberView numbers={[1,2,3,4,5]} />                    
                 </View>
                 <Spacer space={20} />
                 <Button onPress={onPressGetNumber}>
