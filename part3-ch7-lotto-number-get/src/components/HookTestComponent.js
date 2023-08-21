@@ -11,6 +11,6 @@ export const HookTestComponent = (props) => {
             <Typography>
                 결과값: {text}
             </Typography>
-        </View>            
+        </View>
     )
 }

@@ -23,20 +23,20 @@ export const HomeScreen = (props) => {
             </Header>
             <View style={{
                 flex: 1,
-                flexDirection: 'column',                
-                justifyContent: 'center', 
+                flexDirection: 'column',               
+                justifyContent: 'center',
                 paddingHorizontal: 12
             }}>
                 <View style={{
-                    height: 250, 
-                    flexDirection: 'column', 
-                    paddingHorizontal: 24, 
+                    height: 250,
+                    flexDirection: 'column',
+                    paddingHorizontal: 24,
                     backgroundColor: 'white',
-                    borderColor: 'gray' 
+                    borderColor: 'gray'
                 }}>
                     {numbers.length === 6 && (
                         <LottoNumberView numbers={numbers} />
-                    )}                    
+                    )}
                 </View>
                 <Spacer space={20} />
                 <Button onPress={onPressGetNumber}>

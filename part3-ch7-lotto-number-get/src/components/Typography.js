@@ -32,7 +32,7 @@ Typography.prototype =  {
     color: PropTypes.string,
     foontSize: PropTypes.number.isRequired,
     children: PropTypes.oneOfType([
-        PropTypes.element, 
+        PropTypes.element,
         PropTypes.string
     ]).isRequired,
 }

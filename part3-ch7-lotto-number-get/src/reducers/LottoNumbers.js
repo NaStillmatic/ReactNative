@@ -14,7 +14,7 @@ export const lottoNumberReducers = (state = defaultState, action) => {
                 {
                     date: new Date(),
                     numbers: action.numbers
-                }                
+                }
             ])
         }
     }

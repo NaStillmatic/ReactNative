@@ -19,12 +19,12 @@ import { Image as RNImage } from "react-native";
 
 export const LocalImage = (props) => {
     return (
-        <RNImage 
+        <RNImage
             source={props.localAsset}
             style={[props.style, {
-                width: props.width, 
+                width: props.width,
                 height: props.height
-            }]} 
+            }]}
         />
     )
 }

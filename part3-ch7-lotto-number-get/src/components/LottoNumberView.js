@@ -54,9 +54,9 @@ export const LottoNumberView = (props) => {
                     <Animated.View
                         style={{ 
                             backgroundColor: getNumberBackgroundColor(item), 
-                            width:40, 
+                            width: 40, 
                             height: 40, 
-                            borderRadius:20, 
+                            borderRadius: 20, 
                             alignItems: 'center',
                             justifyContent: 'center',                            
                             transform: [

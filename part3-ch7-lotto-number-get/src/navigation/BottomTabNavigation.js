@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 export const BottomTabNavigation = () => {
 
     return (
-        <Tab.Navigator 
+        <Tab.Navigator
             screenOptions={({route}) => {
                 return {
                     headerShown: false,

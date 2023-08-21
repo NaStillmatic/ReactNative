@@ -14,7 +14,7 @@ export const HistoryListScreen = (props) => {
                 <Header.Title title='History'></Header.Title>
             </Header>
 
-            <FlatList 
+            <FlatList
                 style={{flex:1}}
                 data={history}
                 contentContainerStyle={{

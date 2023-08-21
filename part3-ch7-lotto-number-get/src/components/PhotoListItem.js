@@ -20,7 +20,7 @@ export const PhotoListItem = (props) => {
         Animated.timing(animValue, {
             duration: 200,
             toValue: 1,
-            useNativeDriver: true, 
+            useNativeDriver: true,
         }).start();
     }, [])
 
@@ -29,7 +29,7 @@ export const PhotoListItem = (props) => {
         Animated.timing(animValue, {
             duration: 200,
             toValue: 0,
-            useNativeDriver: true, 
+            useNativeDriver: true,
         }).start();
     }, [])
 
@@ -39,20 +39,20 @@ export const PhotoListItem = (props) => {
     })
 
     return (
-        <Button 
+        <Button
             onPress={onPressItem}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
-            paddingHorizontal={20} 
+            paddingHorizontal={20}
             paddingVertical={10}
         >
             <Animated.View style={{transform:[{scale: scale}]}}>
-                <RemoteImage                    
-                    url={props.url} 
-                    width={width-40} 
-                    height={width * 1.2} 
+                <RemoteImage
+                    url={props.url}
+                    width={width-40}
+                    height={width * 1.2}
                 />
-            </Animated.View>            
+            </Animated.View>
         </Button>
     )
 }

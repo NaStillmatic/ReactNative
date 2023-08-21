@@ -17,7 +17,7 @@ import { View } from 'react-native';
 export const Divider = (props) => {
     return (
         <View style={{
-            alignSelf: 'stretch',            
+            alignSelf: 'stretch',
             borderWidth: 0.5,
             marginHorizontal: 24,
             borderColor: 'gray' }}/>

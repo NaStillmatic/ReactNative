@@ -21,6 +21,6 @@ export const HeaderGroup = (props) => {
             alignItems: 'center',
         }}>
             {props.children}
-        </View>            
+        </View>
     )
 }

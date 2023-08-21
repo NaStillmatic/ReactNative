@@ -19,7 +19,7 @@ export class HeaderWithoutCompound extends React.Component {
                             flexDirection: 'row',
                             borderBottomColor:'gray',
                             borderBottomWidth: 1
-                        }}> 
+                        }}>
                             <Spacer horizontal={true} space={12} />
                             <View style={{
                                 flex: 1,
@@ -36,7 +36,7 @@ export class HeaderWithoutCompound extends React.Component {
                                         </Button>
                                     )}
                                     <Typography fontSize={18}>{this.props.title}</Typography>
-                                </View>                                
+                                </View>
                                 {this.props.rightIcon &&  (
                                     <Button onPress={this.props.rightIcon.onPress}>
                                         <Icon iconName={this.props.rightIcon.iconName} sie={28} />
@@ -45,7 +45,7 @@ export class HeaderWithoutCompound extends React.Component {
                             </View>
                             <Spacer horizonta={true} space={12} />
                         </View>
-                    </View>                
+                    </View>
                 )}
             </SafeAreaInsetsContext.Consumer>
         )
