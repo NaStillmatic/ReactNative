@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, useWindowDimensions } from 'react-native';
 import { Header } from '../components/Header/Header';
 import { SingleLineInput } from '../components/SingleLineInput';
@@ -11,6 +11,7 @@ import { useSetRecoilState } from 'recoil';
 import { atomLinkList } from '../states/atomLinkList';
 import { getOpenGraphData } from '../utils/OpenGraphTagUtils';
 import { RemoteImage } from '../components/RemoteImage';
+import { getClipboardString } from '../utils/ClipboardUtils';
 
 export const AddLinkScreen = () => {
     const navigation = useNavigation();
@@ -29,8 +30,8 @@ export const AddLinkScreen = () => {
 
         updateList((prevState) => {
             const list = [{
-                title: '',
-                image: '',
+                title: metaData.title,
+                image: metaData.image,
                 link: url, 
                 createdAt: new Date().toISOString(),
             }]
@@ -43,11 +44,31 @@ export const AddLinkScreen = () => {
     }, [url])
 
     const onSubmitEditing = useCallback(async() => {
-        const result  = await getOpenGraphData(url);
-        console.log(result);
+        const result  = await getOpenGraphData(url);        
 
         setMetaData(result);
     }, [url])
+
+    const onGetClipboardString = useCallback(async() => {
+        const result = await getClipboardString();
+    
+        if (result.startsWith('http://') || result.startsWith('https://')) {
+            setUrl(result);
+            const ogResult = await getOpenGraphData(result);
+            setMetaData({
+                title: ogResult.title,
+                image: ogResult.image,
+                description: ogResult.description,
+            })
+        }
+
+        console.log(result);
+    })
+
+    useEffect(() => {
+        // https://fastcampus.co.kr
+        onGetClipboardString();
+    }, [])
 
     return (
         <View style={{flex: 1}}>
