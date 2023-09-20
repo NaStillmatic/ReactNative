@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useCallback } from 'react';
-import { FlatList, View } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { FlatList, SectionList, View } from 'react-native';
 import { Header } from '../components/Header/Header';
 import { Button } from '../components/Button';
 import { Typography } from '../components/Typography';
@@ -22,6 +22,36 @@ export const LinkListScreen = () => {
     const onPressAddButton = useCallback(() => {
         navigation.navigate('AddLink')
     }, [])
+
+    const sectionData = useMemo(() => {
+
+        const dateList = {};
+        
+        const makeDateString = (createAt) =>{
+            const dataItem = new Date(createAt);
+            return `${dataItem.getFullYear()}.${dataItem.getMonth()}.${dataItem.getDay()} ${dataItem.getHours()}:${dataItem.getMinutes()}}`
+        }
+
+        if(!data.list) return [];
+
+        data.list.forEach((item) => {
+            const keyName = makeDateString(item.createdAt);
+            if (!dateList[keyName]) {
+                dateList[keyName] = [item];                
+            } else {
+                dateList[keyName].push(item);
+            }
+        })
+
+        return Object.keys(dateList).map((item) => {
+            return {
+                title: item,
+                data: dateList[item]
+            }
+        })
+
+    }, [data.list])
+
     return (
         <View style={{flex:1, }}>
             <Header>
@@ -30,9 +60,9 @@ export const LinkListScreen = () => {
                 </Header.Group>
             </Header>
 
-            <FlatList
+            <SectionList
                 style={{flex:1,}}
-                data={data.list}
+                sections={sectionData}
                 renderItem={({item}) => {
                     return (
                         <Button onPress={() => onPressListItem(item)} paddingHorizontal={24} paddingVertical={24}>
@@ -51,7 +81,17 @@ export const LinkListScreen = () => {
                         
                     )  
                 }}
-            />
+
+                renderSectionHeader={({section}) =>{
+                    console.log(section);
+
+                    return (
+                        <View style={{paddingHorizontal:12, paddingVertical: 4, backgroundColor: 'white'}}>
+                            <Typography color='gray' fontSize={12} >{section.title}</Typography>
+                        </View>
+                    )
+                }}
+            />            
             
             <View style={{
                 position: 'absolute', 
