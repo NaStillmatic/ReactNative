@@ -9,7 +9,7 @@ import { Typography } from '../components/Typography';
 import { useNavigation } from '@react-navigation/native';
 
 export const NewsListScreen = () => {
-    const naviagtion = useNavigation();
+    const navigation = useNavigation();
 
     const dispatch = useDispatch();
     const [query, setQuery] = useState('');
@@ -24,7 +24,7 @@ export const NewsListScreen = () => {
     const newsList = useSelector((state) => state.news.newsList);
 
     const onPressListItem = useCallback((newsItem) => {
-        naviagtion.navigate('NewsDetail', {newsItem})
+        navigation.navigate('NewsDetail', {newsItem})
     })
 
     return (
